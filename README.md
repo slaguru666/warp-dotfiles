@@ -45,13 +45,19 @@ safe to run even before you've added keybindings or themes.
 
 ## Set up on a new machine
 
+> The installer is **Windows / PowerShell** only. On macOS or Linux the config
+> paths and symlink mechanics differ, so `install.ps1` will not work as-is.
+
+**Prerequisites:** [Git](https://git-scm.com/) and Warp installed. The repo is
+public, so cloning needs no authentication.
+
 1. Enable **Developer Mode** so non-admin symlink creation works:
    Settings > Privacy & security > For developers > Developer Mode.
    (Alternatively, run the installer from an elevated PowerShell.)
 2. Clone and run:
 
    ```powershell
-   git clone https://github.com/<you>/warp-dotfiles.git $env:USERPROFILE\warp-dotfiles
+   git clone https://github.com/slaguru666/warp-dotfiles.git $env:USERPROFILE\warp-dotfiles
    cd $env:USERPROFILE\warp-dotfiles
    pwsh -ExecutionPolicy Bypass -File .\install.ps1
    ```
@@ -107,10 +113,26 @@ cloud, prefer keeping device-specific values (startup shell, preferred editor)
 out of the synced `settings.toml`, or drop that entry from `$Entries` as noted
 above.
 
+## Repository status: archived (read-only)
+
+This repository is currently **archived** on GitHub, which means:
+
+- **Consuming the config still works** — you can `git clone` and `git pull` on
+  any number of machines and run the installer normally.
+- **Pushing changes is rejected** until the repo is unarchived.
+
+To resume contributing config updates, unarchive it first (requires the
+[GitHub CLI](https://cli.github.com/)):
+
+```powershell
+gh repo unarchive slaguru666/warp-dotfiles --yes
+```
+
 ## Updating
 
 Because the targets are symlinks back into this repo, edits made in Warp land
-directly in the working tree. Commit and push as usual:
+directly in the working tree. Commit and push as usual (after unarchiving, per
+the note above):
 
 ```powershell
 cd $env:USERPROFILE\warp-dotfiles
