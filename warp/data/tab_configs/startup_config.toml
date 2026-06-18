@@ -1,0 +1,8 @@
+name = "New tab: tevans"
+
+[[panes]]
+id = "main"
+type = "terminal"
+directory = 'C:\Users\tevans'
+
+[params]

@@ -1,0 +1,8 @@
+# Backups created by install.ps1
+*.bak-*
+*.bak
+
+# OS / editor cruft
+Thumbs.db
+Desktop.ini
+.DS_Store
