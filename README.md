@@ -113,14 +113,16 @@ cloud, prefer keeping device-specific values (startup shell, preferred editor)
 out of the synced `settings.toml`, or drop that entry from `$Entries` as noted
 above.
 
-## Repository status: active (unarchived)
+## Repository status: archived (read-only)
 
-This repository is **unarchived** (writable), so `git clone`, `git pull`, and
-`git push` all work normally — no extra steps are needed to publish config
-changes.
+This repository is **archived** on GitHub (read-only):
 
-If it is ever archived again it becomes read-only and pushes are rejected until
-you unarchive it with the [GitHub CLI](https://cli.github.com/):
+- **Consuming the config still works** — `git clone` and `git pull` work on any
+  number of machines, and the installer runs normally.
+- **Pushing changes is rejected** until the repo is unarchived.
+
+To resume contributing config updates, unarchive it first (requires the
+[GitHub CLI](https://cli.github.com/)):
 
 ```powershell
 gh repo unarchive slaguru666/warp-dotfiles --yes
@@ -129,7 +131,8 @@ gh repo unarchive slaguru666/warp-dotfiles --yes
 ## Updating
 
 Because the targets are symlinks back into this repo, edits made in Warp land
-directly in the working tree. Commit and push as usual:
+directly in the working tree. Commit and push as usual (after unarchiving, per
+the note above):
 
 ```powershell
 cd $env:USERPROFILE\warp-dotfiles
