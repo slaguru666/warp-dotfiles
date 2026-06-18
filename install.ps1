@@ -15,6 +15,15 @@
       * Developer Mode enabled (Settings > Privacy & security > For developers), or
       * Running this script from an elevated (Administrator) PowerShell.
 
+.PARAMETER DataRoot
+    Override the Warp "data" root (where tab_configs, themes, and
+    keybindings.yaml live). Defaults to %APPDATA%\warp\Warp\data.
+    Useful for testing or non-standard installs.
+
+.PARAMETER ConfigRoot
+    Override the Warp "config" root (where settings.toml lives).
+    Defaults to %LOCALAPPDATA%\warp\Warp\config.
+
 .PARAMETER DryRun
     Print what would happen without making changes.
 
@@ -24,9 +33,12 @@
 .EXAMPLE
     pwsh -ExecutionPolicy Bypass -File .\install.ps1
     pwsh -File .\install.ps1 -DryRun
+    pwsh -File .\install.ps1 -DataRoot C:\tmp\data -ConfigRoot C:\tmp\config -DryRun
 #>
 [CmdletBinding()]
 param(
+    [string]$DataRoot   = (Join-Path $env:APPDATA      'warp\Warp\data'),
+    [string]$ConfigRoot = (Join-Path $env:LOCALAPPDATA 'warp\Warp\config'),
     [switch]$DryRun,
     [switch]$Force
 )
@@ -34,9 +46,8 @@ param(
 $ErrorActionPreference = 'Stop'
 $RepoRoot = $PSScriptRoot
 
-# Resolve Warp config roots. APPDATA = Roaming (data), LOCALAPPDATA = Local (config).
-$DataRoot   = Join-Path $env:APPDATA      'warp\Warp\data'
-$ConfigRoot = Join-Path $env:LOCALAPPDATA 'warp\Warp\config'
+# Warp config roots. APPDATA = Roaming (data), LOCALAPPDATA = Local (config).
+# Both are overridable via the -DataRoot / -ConfigRoot parameters above.
 
 # Managed entries: Source is relative to the repo, Target is absolute.
 # Type is 'File' or 'Directory' (controls how the symlink is created).

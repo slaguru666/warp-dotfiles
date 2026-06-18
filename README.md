@@ -68,6 +68,16 @@ pwsh -File .\install.ps1 -Force    # delete existing real targets instead of bac
 Existing real files at a target are backed up to `<target>.bak-<timestamp>`
 unless `-Force` is used.
 
+The target roots can also be overridden (handy for testing or non-standard
+installs); they default to the standard Warp locations:
+
+```powershell
+pwsh -File .\install.ps1 -DataRoot C:\tmp\data -ConfigRoot C:\tmp\config -DryRun
+```
+
+- `-DataRoot`   — defaults to `%APPDATA%\warp\Warp\data` (tab_configs, themes, keybindings.yaml)
+- `-ConfigRoot` — defaults to `%LOCALAPPDATA%\warp\Warp\config` (settings.toml)
+
 ## Updating
 
 Because the targets are symlinks back into this repo, edits made in Warp land
